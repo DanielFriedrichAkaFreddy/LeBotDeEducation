@@ -1,0 +1,13 @@
+{
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --names \"server,widget\" \"cd packages/server && npm run dev\" \"cd packages/widget && npm run dev\"",
+    "build": "concurrently --names \"server,widget\" \"cd packages/server && npm run build\" \"cd packages/widget && npm run build\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "chat-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.ts",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zodios/core": "^10.9.6",
+    "zod": "^3.22.4"
+  }
+}
