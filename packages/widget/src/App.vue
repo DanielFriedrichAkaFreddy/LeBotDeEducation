@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PaperAirplaneIcon } from "@heroicons/vue/16/solid";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import api from "./api";
 
 interface ChatMessage {
@@ -10,24 +10,31 @@ interface ChatMessage {
 
 const messages = ref<ChatMessage[]>([]);
 const input = ref<string>("");
+const currentNode = ref<string | undefined>();
 
 const sendMessage = () => {
-  if (!input.value) return;
+  if (!input.value && currentNode) return;
 
   messages.value.push({
     role: "user",
     message: input.value,
   });
 
-  api.chatHandler({ message: input.value }).then((response) => {
-    messages.value.push({
-      role: "bot",
-      message: response.message,
+  api
+    .chatHandler({ message: input.value, node: currentNode.value })
+    .then((response) => {
+      messages.value.push({
+        role: "bot",
+        message: response.message,
+      });
     });
-  });
 
   input.value = "";
 };
+
+onMounted(() => {
+  sendMessage();
+});
 </script>
 
 <template>
